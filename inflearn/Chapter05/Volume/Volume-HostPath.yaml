@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Pod
+metadata:
+ name: pod-volume-1
+spec:
+ nodeSelector:
+  kubernetes.io/hostname: k8s-node1
+ containers:
+ - name: container
+   image: tmkube/init
+   volumeMounts:
+   - name: host-path
+     mountPath: /mount1
+ volumes:
+ - name: host-path
+   hostPath:
+    path: /node-v
+    type: DirectoryOrCreate
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+ name: pod-volume-2
+spec:
+ nodeSelector:
+  kubernetes.io/hostname: k8s-node1
+ containers:
+ - name: container
+   image: tmkube/init
+   volumeMounts:
+   - name: host-path
+     mountPath: /mount1
+ volumes:
+ - name: host-path
+   hostPath:
+    path: /node-v
+    type: DirectoryOrCreate
+
